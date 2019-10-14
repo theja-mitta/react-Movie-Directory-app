@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Form from './Form';
 import TableHeader from './TableHeader';
 import TableBody from './TableBody';
 
@@ -18,7 +19,7 @@ class App extends Component {
 
   onMovieChange = e => {
     this.setState({
-      movieName: e.target.value.toLowerCase()
+      movieName: e.target.value.toLowerCase() 
     })
   }
 
@@ -34,7 +35,7 @@ class App extends Component {
     })
   }
 
-  handleSubmit = e => {
+  onHandleSubmit = e => {
     e.preventDefault();
       this.setState({
         items: [...this.state.items, {
@@ -48,21 +49,12 @@ class App extends Component {
   render () {
     return (
       <div>
-        <form className="form"  onSubmit={this.handleSubmit}>
-            <div>
-              <label>Movie Name</label>
-              <input type="text" id="name-input" onChange={this.onMovieChange} required/>
-            </div>
-            <div>
-              <label>Ratings</label>
-              <input type="number" id="ratings-input" onChange={this.onRatingsChange} min="0" step="1" required/>
-            </div>
-            <div>
-              <label>Duration</label>
-              <input type="number" id="duration-input" onChange={this.onDurationChange} min="0" step="1" required/>
-            </div>
-            <button id="submit-button">Submit</button>
-        </form>
+        <Form 
+          onHandleSubmit={this.onHandleSubmit} 
+          onMovieChange={this.onMovieChange} 
+          onRatingsChange={this.onRatingsChange} 
+          onDurationChange={this.onDurationChange}
+        />
         
         <div id="search-input">
             <label>Search</label>

@@ -7,7 +7,7 @@ export default function TableHeader(props) {
         <tr>
           <th>Movie Name</th>
           <th>Ratings</th>
-          <th>Duration</th>
+          <th>Duration (in hours.)</th>
         </tr>
       </tbody>
     </table>

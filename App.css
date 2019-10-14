@@ -10,6 +10,10 @@ label {
   margin-top: 10px;
 }
 
+input {
+  width: 50%;
+}
+
 button {
   margin-top: 10px;
 }
@@ -18,15 +22,22 @@ button {
   margin-top: 15px;
 }
 
+table:not(:empty)  {
+    border: 1px solid;
+}
+
 #directory-table td,
 #directory-table th {
   padding-right: 20px;
   text-align: center;
-  width: 27%;
 }
 
-#directory-table th:first-child {
-  width: 45%;
+#directory-table td:first-child, #directory-table th:first-child {
+  width: 38%;
+}
+
+#directory-table td:last-child, #directory-table th:last-child {
+  width: 58%;
 }
 
 

@@ -20,7 +20,9 @@ export default class TableBody extends React.Component {
     let sortedItems = this.props.items.sort((a, b) => b.duration - a.duration),sortedUniqueItems = this.getUnique(sortedItems,'movieName');
     return (
       <table>
-        {sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>)}
+        <tbody>
+          {sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>)}
+        </tbody>
       </table>
     );
   }
