@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Table from './Table';
+import TableHeader from './TableHeader';
+import TableBody from './TableBody';
 
 
 class App extends Component {
@@ -15,64 +16,51 @@ class App extends Component {
     }
   }
 
-  onMovieChange = (e) => {
+  onMovieChange = e => {
     this.setState({
-      movieName: e.target.value
+      movieName: e.target.value.toLowerCase()
     })
   }
 
-  onRatingsChange = (e) => {
+  onRatingsChange = e => {
     this.setState({
-      ratings: e.target.value
+      ratings: e.target.value.toLowerCase()
     })
   }
 
-  onDurationChange = (e) => {
+  onDurationChange = e => {
     this.setState({
-      duration: e.target.value
+      duration: e.target.value.toLowerCase()
     })
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    if(((this.state.movieName) && (this.state.ratings) && (this.state.duration)) !== '') {
-      this.state.items.push({
-        movieName: this.state.movieName,
-        ratings: this.state.ratings,
-        duration: this.state.duration
-      });
-      console.log(this.state.items);
       this.setState({
-        movieName: '',
-        ratings: '',
-        duration: ''
-      })
-    }
+        items: [...this.state.items, {
+          movieName: this.state.movieName,
+          ratings: this.state.ratings,
+          duration: this.state.duration
+        }]
+      });
   }
-
-  renderTable() {
-    return (
-      <table>
-        <tr>
-          <th>Movie Name</th>
-          <th>Ratings</th>
-          <th>Duration</th>
-        </tr>
-      </table>
-    );
-  }
-
-  //  renderResult() {
-  //   this.state.items.map(item => <div>{item.movieName}</div>);
-  // }
 
   render () {
     return (
       <div>
         <form className="form"  onSubmit={this.handleSubmit}>
-            <div><label>Movie Name</label><input type="text" id="name-input" onChange={this.onMovieChange}/></div>
-            <div><label>Ratings</label><input type="text" id="ratings-input" onChange={this.onRatingsChange}/></div>
-            <div><label>Duration</label><input type="text" id="duration-input" onChange={this.onDurationChange}/></div>
+            <div>
+              <label>Movie Name</label>
+              <input type="text" id="name-input" onChange={this.onMovieChange} required/>
+            </div>
+            <div>
+              <label>Ratings</label>
+              <input type="number" id="ratings-input" onChange={this.onRatingsChange} min="0" step="1" required/>
+            </div>
+            <div>
+              <label>Duration</label>
+              <input type="number" id="duration-input" onChange={this.onDurationChange} min="0" step="1" required/>
+            </div>
             <button id="submit-button">Submit</button>
         </form>
         
@@ -80,9 +68,14 @@ class App extends Component {
             <label>Search</label>
             <input type="text" id="name-input" />
         </div>
+
         <div id="directory-table">
-          {this.renderTable()}
-          {this.state.items.map(item => <div>{item.movieName},{item.ratings},{item.duration}</div>)}
+          <TableHeader />
+          <TableBody items={this.state.items}/>
+        </div>
+
+        <div id="no-result">
+          {this.state.items.length ? '' : "NO MOVIES FOUND"}
         </div>
       </div>
     );
