@@ -8,12 +8,14 @@ import TableBody from './TableBody';
 class App extends Component {
   constructor(props) {
     super(props);
+    this.searchInput = React.createRef();
     this.state = {
       movieName: '',
       ratings: '',
       duration: '',
       isValidated: false,
-      items: []
+      items: [],
+      filteredItems: []
     }
   }
 
@@ -35,6 +37,27 @@ class App extends Component {
     })
   }
 
+  onSearchHandle = e => {
+    if(this.searchInput.current.value.length > 1 && this.state.items.length) {
+      this.movieSearch();
+    } else if(this.searchInput.current.value.length <= 1) {
+      this.setState({
+        filteredItems: []
+      })
+    }
+  }
+
+  movieSearch() {
+    this.setState({
+      filteredItems: this.state.items.filter(movie => {
+        if(movie.movieName.startsWith(this.searchInput.current.value)) {
+          return true;
+        }
+          return false;
+      })
+    })
+  }
+
   onHandleSubmit = e => {
     e.preventDefault();
       this.setState({
@@ -52,7 +75,7 @@ class App extends Component {
 
   render () {
     return (
-      <div>
+      <div className="app">
         <Form 
           onHandleSubmit={this.onHandleSubmit} 
           onMovieChange={this.onMovieChange} 
@@ -63,16 +86,22 @@ class App extends Component {
         
         <div id="search-input">
             <label>Search</label>
-            <input type="text" id="name-input" />
+            <input type="text" id="name-input"   
+            placeholder="Enter movie name" 
+            onChange={this.onSearchHandle} 
+            ref={this.searchInput} />
+            <div className="search-result">
+              {(this.state.filteredItems.length) ? <span class="success">{this.state.filteredItems.length} searches found</span> : <span className="error">No search made yet!!!</span>}
+            </div>
         </div>
 
         <div id="directory-table">
           <TableHeader />
-          <TableBody items={this.state.items}/>
+          <TableBody items={this.state.items} filteredItems={this.state.filteredItems}/>
         </div>
 
         <div id="no-result">
-          {this.state.items.length ? '' : "NO MOVIES FOUND"}
+          {this.state.items.length ? '' : <span className="error">NO MOVIES FOUND !!!</span>}
         </div>
       </div>
     );

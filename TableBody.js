@@ -21,7 +21,9 @@ export default class TableBody extends React.Component {
     return (
       <table>
         <tbody>
-          {sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>)}
+          {
+            this.props.filteredItems.length ? this.props.filteredItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>) : sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}h</td></tr>)
+          }
         </tbody>
       </table>
     );

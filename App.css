@@ -1,45 +1,59 @@
+h1, p {
+  font-family: Lato;
+}
+
 body {
   margin: 10px;
   display: flex;
   justify-content: center;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.app {
+  width: 500px;
+  margin: auto;
+}
+
 label {
   display: block;
   font-weight: bold;
-  margin-top: 10px;
+  margin: 5px 0;
+}
+
+.form {
+  width: 100%;
+  margin: 20px auto;
+  text-align: center;
 }
 
 input {
   width: 50%;
+  height: 30px;
 }
 
 button {
   margin-top: 10px;
+  width: 100px;
+  height: 25px;
 }
 
 #directory-table {
-  margin-top: 15px;
+  margin: 35px 0;
 }
 
 table:not(:empty)  {
-    border: 1px solid;
+  border: 1px solid;
 }
 
 #directory-table td,
 #directory-table th {
-  padding-right: 20px;
+  padding: 5px;
   text-align: center;
+  width: 33.33%;
 }
-
-#directory-table td:first-child, #directory-table th:first-child {
-  width: 38%;
-}
-
-#directory-table td:last-child, #directory-table th:last-child {
-  width: 58%;
-}
-
 
 #directory-table table {
   width: 100%;
@@ -47,6 +61,16 @@ table:not(:empty)  {
 
 #no-result {
   width: 100%;
-  text-align: left;
-  margin: 40px;
+  text-align: center;
+  margin: 40px auto;
+}
+
+.error {
+  color: #ff0000;
+  font-size: 14px;
+}
+
+.success {
+  color: #008000;
+  font-size: 14px;
 }
