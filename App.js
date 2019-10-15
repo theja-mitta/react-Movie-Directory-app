@@ -42,7 +42,11 @@ class App extends Component {
           movieName: this.state.movieName,
           ratings: this.state.ratings,
           duration: this.state.duration
-        }]
+        }],
+        movieName: '',
+        ratings: '',
+        duration: '',
+        isValidated: false
       });
   }
 
@@ -54,6 +58,7 @@ class App extends Component {
           onMovieChange={this.onMovieChange} 
           onRatingsChange={this.onRatingsChange} 
           onDurationChange={this.onDurationChange}
+          formValues={this.state}
         />
         
         <div id="search-input">
