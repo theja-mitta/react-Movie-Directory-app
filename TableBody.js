@@ -17,12 +17,13 @@ export default class TableBody extends React.Component {
   }
 
   render () {
-    let sortedItems = this.props.items.sort((a, b) => b.duration - a.duration),sortedUniqueItems = this.getUnique(sortedItems,'movieName');
+    let sortedItems = this.props.items.sort((a, b) => b.duration - a.duration),sortedUniqueItems = this.getUnique(sortedItems,'movieName'),
+    uniqFilteredItems = this.getUnique(this.props.filteredItems,'movieName');
     return (
       <table>
         <tbody>
           {
-            this.props.filteredItems.length ? this.props.filteredItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>) : sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}h</td></tr>)
+            this.props.filteredItems.length ? uniqFilteredItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}</td></tr>) : sortedUniqueItems.map(item => <tr><td>{item.movieName}</td><td>{item.ratings}</td><td>{item.duration}h</td></tr>)
           }
         </tbody>
       </table>
